@@ -33,5 +33,5 @@ if [ ! -d "$ABSOLUTE_PATH" ]; then
 	cd $ROOT
 	sudo git clone https://github.com/Fichen/utn-devops-app.git
 	cd $ABSOLUTE_PATH
-	sudo git checkout feature/unidad-1
+	sudo git checkout unidad-1
 fi

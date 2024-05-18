@@ -1,3 +1,6 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
 Vagrant.configure("2") do |config|
 
   if Vagrant.has_plugin?("vagrant-vbguest") then
@@ -9,7 +12,7 @@ Vagrant.configure("2") do |config|
   if Vagrant::Util::Platform.darwin? 
     box = "bento/ubuntu-22.04-arm64"
   else
-    config.vm.provision "shell", inline: "sudo apt-get update && sudo apt-get install -y virtualbox-guest-x11"
+    config.vm.provision "shell", inline: "sudo apt update && sudo apt install -y virtualbox-guest-x11"
   end
 
   config.vm.box = box
@@ -17,18 +20,16 @@ Vagrant.configure("2") do |config|
   config.vm.box_download_insecure = true
   config.vm.hostname = "utn-devops.localhost"
   config.vm.boot_timeout = 1000
+
   config.vm.provider "virtualbox" do |vb|
-    v.name = "devops-vagrant-ubuntu"
+    vb.name = "devops-vagrant-ubuntu"
     vb.memory = "4096"
   end
 
   config.vm.synced_folder ".", "/vagrant"
 
-  config.vm.provider "vmware_desktop" do |vm|
-    vm.memory = "2048"
-  end
-
   config.vm.provision "file", source: "utn-dev.conf", destination: "/tmp/utn-dev.conf"
   config.vm.provision :shell, path: "Vagrant.bootstrap.sh", run: "always"
+  config.vm.provision :shell, path: "create-user.sh"
 
 end
