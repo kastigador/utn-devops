@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = "utn-devops.localhost"
   config.vm.boot_timeout = 1000
   config.vm.provider "virtualbox" do |vb|
-    v.name = "utn-devops-vagrant-ubuntu"
+    v.name = "devops-vagrant-ubuntu"
     vb.memory = "4096"
   end
 
