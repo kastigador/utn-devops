@@ -13,13 +13,13 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.box = box
-  config.vm.network "forwarded_port", guest: 80, host: 8081
+  config.vm.network "forwarded_port", guest: 80, host: 8080
   config.vm.box_download_insecure = true
   config.vm.hostname = "utn-devops.localhost"
   config.vm.boot_timeout = 1000
   config.vm.provider "virtualbox" do |vb|
     v.name = "utn-devops-vagrant-ubuntu"
-    vb.memory = "2048"
+    vb.memory = "4096"
   end
 
   config.vm.synced_folder ".", "/vagrant"
@@ -28,7 +28,7 @@ Vagrant.configure("2") do |config|
     vm.memory = "2048"
   end
 
-  config.vm.provision "file", source: "Configs/devops.site.conf", destination: "/tmp/devops.site.conf"
+  config.vm.provision "file", source: "utn-dev.conf", destination: "/tmp/utn-dev.conf"
   config.vm.provision :shell, path: "Vagrant.bootstrap.sh", run: "always"
 
 end
