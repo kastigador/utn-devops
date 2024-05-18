@@ -1,4 +1,5 @@
 Vagrant.configure("2") do |config|
+
   if Vagrant.has_plugin?("vagrant-vbguest") then
     config.vbguest.auto_update = false
   end
@@ -10,8 +11,8 @@ Vagrant.configure("2") do |config|
   else
     config.vm.provision "shell", inline: "sudo apt-get update && sudo apt-get install -y virtualbox-guest-x11"
   end
-  config.vm.box = box
 
+  config.vm.box = box
   config.vm.network "forwarded_port", guest: 80, host: 8081
   config.vm.box_download_insecure = true
   config.vm.hostname = "utn-devops.localhost"
@@ -20,6 +21,7 @@ Vagrant.configure("2") do |config|
     v.name = "utn-devops-vagrant-ubuntu"
     vb.memory = "2048"
   end
+
   config.vm.synced_folder ".", "/vagrant"
 
   config.vm.provider "vmware_desktop" do |vm|
